@@ -140,20 +140,30 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-8">
-            <form>
+            <div class="alert alert-dark alert-dismissible fade show d-none" role="alert">
+              <strong>Thanks!</strong> Your message has been sent.
+              <button type="button" onclick="document.location = 'https://sunanjy.github.io'" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <form name="form-github">
               <div class="mb-3">
                 <label for="Name" class="form-label">Nama Lengkap</label>
-                <input type="text" class="form-control" id="Name" aria-describedby="Name" />
+                <input type="text" class="form-control" id="Name" aria-describedby="Name" name="nama" />
               </div>
               <div class="mb-3">
                 <label for="Email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="Email" aria-describedby="Email" />
+                <input type="email" class="form-control" id="Email" aria-describedby="Email" name="email" />
               </div>
               <div class="mb-3">
                 <label for="Pesan" class="form-label">Pesan</label>
-                <textarea class="form-control" id="Pesan" rows="5"></textarea>
+                <textarea class="form-control" id="Pesan" rows="5" name="pesan"></textarea>
               </div>
-              <button type="Submit" class="btn btn-dark">Submit</button>
+              <button type="submit" class="btn btn-dark btn-kirim">Submit</button>
+
+              <button class="btn btn-dark btn-loading d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </button>
             </form>
           </div>
         </div>
@@ -167,5 +177,30 @@
     </footer>
     <!-- TUTUP FOOTER -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbyRO0WyYeG6xU_od0wXmfl4_HlnTZwc6kioq4khJkuNVjwHdnMTM2Wy8AXUM4HwSO_t/exec";
+      const form = document.forms["form-github"];
+      const buttonKirim = document.querySelector(" .btn-kirim");
+      const buttonLoading = document.querySelector(" .btn-loading");
+      const myAlert = document.querySelector(" .alert");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        buttonLoading.classList.toggle("d-none");
+        buttonKirim.classList.toggle("d-none");
+
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            buttonLoading.classList.toggle("d-none");
+            buttonKirim.classList.toggle("d-none");
+            myAlert.classList.toggle("d-none");
+            form.reset();
+            console.log("Success!", response);
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
   </body>
 </html>
