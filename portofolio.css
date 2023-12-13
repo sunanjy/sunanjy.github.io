@@ -7,6 +7,43 @@ section {
   background-color: #343a40;
 }
 
-#projects {
+/* #projects {
   background-color: #343a40;
+} */
+
+#contact {
+  background-color: #343a40;
+}
+
+.lead {
+  font-size: large;
+}
+
+.about {
+  font-size: small;
+}
+
+.button-container {
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 15px;
+}
+
+.card-text {
+  font-size: 13px;
+}
+
+.btn {
+  font-size: 13px;
+}
+
+.card-title-publication {
+  font-size: small;
+}
+
+.kampus-mengajar {
+  font-size: medium;
+  text-align: justify;
 }
